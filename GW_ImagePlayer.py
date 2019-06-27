@@ -91,6 +91,12 @@ print(datetime.now())
 print ('')
 
 
+def showImage(pic):
+    image = pygame.image.load('media/'+pic)
+    screen.blit(image,(0,0))
+    pygame.display.flip()
+
+
 #Fade in pic Function
 def fadeInPic(pic):
     #print ()
@@ -178,13 +184,15 @@ def Change():
     if current.is_integer():
         servoOpen()
         if isImage(current):
-            fadeInPic(Media[int(current)])
+            #fadeInPic(Media[int(current)])
+            showImage(Media[int(current)])
         #else:
             
     else:
         servoClose()
         if isImage(last):
-            fadeOutPic(Media[int(last)])
+            #fadeOutPic(Media[int(last)])
+            showImage(Media[int(last)])
         
 
 

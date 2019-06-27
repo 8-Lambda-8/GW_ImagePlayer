@@ -128,7 +128,7 @@ def fadeOutPic(pic):
         screen.fill(BLACK)
         imageA.set_alpha(i*fadeMultiplier)
         screen.blit(imageA,(0,0))
-        pygame.display.flip()		
+        pygame.display.flip()
         #time.sleep(fadeDelay)
 
 
@@ -193,8 +193,8 @@ def Change():
     else:
         servoClose()
         screen.fill(BLACK)
-        screen.flip()
-        
+        pygame.display.flip()
+
         #if isImage(last):
             #fadeOutPic(Media[int(last)])  
         

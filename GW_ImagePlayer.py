@@ -55,6 +55,8 @@ FILES = ["ScreenTest.png",
 
 ]
 
+
+
 Media = [
     FILES[0],
     FILES[1],
@@ -190,11 +192,12 @@ def Change():
             
     else:
         servoClose()
-        if isImage(last):
-            #fadeOutPic(Media[int(last)])
-            screen.fill(BLACK)
+        screen.fill(BLACK)
+        screen.flip()
         
-
+        #if isImage(last):
+            #fadeOutPic(Media[int(last)])  
+        
 
 def exit():
     globals().update(running = False)

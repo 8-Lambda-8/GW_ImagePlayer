@@ -76,7 +76,7 @@ if len(sys.argv)>1:
 fadeDelay = 0#.0000001
 Delay = 0#.0001
 
-fadeMultiplier = 16
+fadeMultiplier = 8
 
 if DEBUG:
     fadeDelay = 0#.000000001
@@ -192,7 +192,7 @@ def Change():
         servoClose()
         if isImage(last):
             #fadeOutPic(Media[int(last)])
-            showImage(Media[int(last)])
+            screen.fill(BLACK)
         
 
 

@@ -76,7 +76,7 @@ if len(sys.argv)>1:
 fadeDelay = 0#.0000001
 Delay = 0#.0001
 
-fadeMultiplier = 4
+fadeMultiplier = 6
 
 if DEBUG:
     fadeDelay = 0#.000000001
@@ -103,7 +103,7 @@ def fadeInPic(pic):
         imageA.set_alpha(i*fadeMultiplier)
         screen.blit(imageA,(0,0))
         pygame.display.flip()		
-        time.sleep(fadeDelay)
+        #time.sleep(fadeDelay)
         
     pygame.display.flip()
 
@@ -121,7 +121,7 @@ def fadeOutPic(pic):
         imageA.set_alpha(i*fadeMultiplier)
         screen.blit(imageA,(0,0))
         pygame.display.flip()		
-        time.sleep(fadeDelay)
+        #time.sleep(fadeDelay)
 
 
 
@@ -145,9 +145,6 @@ h = infoObject.current_h
 if DEBUG:
 	w=1280
 	h=1024
-
-
-if DEBUG:
 	screen = pygame.display.set_mode((w, h))
 else:
 	screen = pygame.display.set_mode((w, h),pygame.FULLSCREEN)

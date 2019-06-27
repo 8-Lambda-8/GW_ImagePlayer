@@ -1,6 +1,6 @@
 import pygame, sys, os
-import vlc, random
-import time, threading
+import vlc
+import time
 from datetime import datetime
 
 
@@ -76,7 +76,7 @@ if len(sys.argv)>1:
 fadeDelay = 0#.0000001
 Delay = 0#.0001
 
-fadeMultiplier = 6
+fadeMultiplier = 16
 
 if DEBUG:
     fadeDelay = 0#.000000001

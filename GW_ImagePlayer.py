@@ -1,6 +1,6 @@
 import sys, os
 import vlc
-import time
+import sched, time
 from datetime import datetime
 from pygame import *
 
@@ -34,34 +34,35 @@ current = 0.0
 
 DEBUG = False
 
-
 FILES = ["ScreenTest.png",#0
-    "AnnaFolder.jpg",#1 Anna Folder
-    "SteegerBerge.jpg",#2 Steeger Berge
-    "Klostermauern.jpg",#3 Klostermauern
-    "Irland.jpg",#4 Irland
-    "Universitaet.jpg",#5 Universitaet
-    "Krieg.jpg",#6 Krieg
-    "Schiff.jpg",#7 Schiff
-    "Schiff.jpg",#8 Indien
-    "Schiff.jpg",#9 Hospital
-    "Glaskreuz.jpg",#10 Glaskreuz
-    "FilmAnna1.mp4",#11 Film Anna 1 (Frida)
-    "BergeTirol.jpg",#12 Berge Tirol
-    "NewYork.jpg",#13 New york
-    "Indien_HFH.jpg",#14 Indien Hole Family Hospital
-    "VatikanAussen.jpg",#15 Vatikan aussen
-    "VatikanInnen.jpg",#16 Vatikan innen
-    "kardinaele.mp4",#17 kardinaele
-    "SteegBerg.jpg",#18
-    "SteegKirche.jpg",#19
-    "SteegBerg.jpg",#20
-    "LiedText.mp4"#21
+    "1.png",#1 Anna Folder
+    "2.png",#2 Steeger Berge
+    "3.png",#3 Klostermauern
+    "4_1.png",#4 Irland
+    "4_2.png",#5 Universitaet
+    "5.png",#6 Krieg
+    "6_1.png",#7 Schiff
+    "6_2.png",#8 Indien
+    "6_3.png",#9 Hospital
+    "6a.png",#10 Glaskreutz
+    "8und9.png",#11 tiroler Berge
+    "10_1.png",#12 New york
+    "10_2.png",#13 New york
+    "10_3.png",#14 New york
+    "11.png",#15 Indien Hole Family Hospital
+    "12_1.png",#16 Vatikan aussen
+    "12_2.png",#17 Vatikan innen
+    "kardinaele.mp4",#18
+    "14_1.png",#19
+    "14_2.png",#20
+    "15.png"#21
 
 ]
 
 
-"""FILES[1],
+Media = [
+    FILES[0],
+    FILES[1],
     FILES[2],
     FILES[3],
     FILES[4],
@@ -71,25 +72,22 @@ FILES = ["ScreenTest.png",#0
     FILES[8],
     FILES[9],
     FILES[10],
+    FILES[10],
     FILES[11],
     FILES[12],
     FILES[13],
     FILES[14],
-    FILES[15],"""
-
-
-Media = [
-    FILES[0],
-    
+    FILES[15],
     FILES[16],
     FILES[17],
-    FILES[17],
-    FILES[17],
-    FILES[17],
+    FILES[18],
+    FILES[18],
+    FILES[18],
+    FILES[18],
+    FILES[18],
     FILES[18],
     FILES[19],
-    FILES[20],
-    FILES[21]
+    FILES[20]
 ]
 
 
@@ -129,13 +127,13 @@ def fadeInPic(pic):
 
 
     for i in range (int(254/fadeMultiplier)):
-        
-        screen.fill(BLACK)		
+
+        screen.fill(BLACK)
         imageA.set_alpha(i*fadeMultiplier)
         screen.blit(imageA,(0,0))
-        display.flip()		
+        display.flip()
         #time.sleep(fadeDelay)
-        
+
     display.flip()
 
 #END Fade in pic Function
@@ -144,10 +142,10 @@ def fadeInPic(pic):
 def fadeOutPic(pic):
 
     imageA = image.load('media/'+pic)
-    
+
 
     for i in reversed(range (int(254/fadeMultiplier))):
-		
+
         screen.fill(BLACK)
         imageA.set_alpha(i*fadeMultiplier)
         screen.blit(imageA,(0,0))
@@ -179,7 +177,7 @@ if DEBUG:
 	screen = display.set_mode((w, h))
 else:
 	screen = display.set_mode((w, h),FULLSCREEN)
-	
+
 screen.fill(BLACK)
 
 i = 0
@@ -198,6 +196,7 @@ player.set_xwindow(display.get_wm_info()['window'])
 vlc_media = vlcInstance.media_new("media/kardinaele.mp4")
 #END INIT VLC
 
+#sch = sched.scheduler(time.time, time.sleep)
 
 def startVideo(x):
     vlc_media = vlcInstance.media_new("media/"+x)
@@ -205,18 +204,18 @@ def startVideo(x):
     player.play()
 
 def stopVideo():
-    
+
     player.stop()
 
 
-def isImage(x):  
+def isImage(x):
     return not (".mp4" in Media[int(x)])
-      
+
 def Change():
     print("")
     print("Current="+str(current))
     print("Last="+str(last))
-    
+
     if current.is_integer():
         servoOpen()
         if isImage(current):
@@ -234,25 +233,15 @@ def Change():
             print("")
         else:
             stopVideo()
-        
+
+	#sch.enter(5, 1, servoStop())
+	#sch.run()
 
 def exit():
     globals().update(running = False)
     #GPIO.cleanup()
     print('\nQuit\n')
     quit()
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 fps = 60
@@ -262,21 +251,21 @@ time.set_timer(DISPLAY_REFRESH, int(1000.0/fps))
 """
 if current <0:
             current = 0
-        
+
         if current != last:
             Change()
 
         last = current"""
 
 try:
-            
+
     #time.sleep(5000)
     Change()
     while running:
-        
+
         if current <0:
             current = 0
-        
+
         if current != last:
             Change()
         last = current
@@ -287,7 +276,7 @@ try:
             elif e.type == KEYDOWN:
                 print("KEYDOWN")
                 print(e.key)
-                if e.key == K_SPACE or e.key == K_RIGHT: 
+                if e.key == K_SPACE or e.key == K_RIGHT:
                     current = current + 0.5
                     print(current)
                 if e.key == K_LEFT:
@@ -300,7 +289,7 @@ try:
 
 
     time.wait(0)
-    
+
 
 except (KeyboardInterrupt, SystemExit):
 	exit()

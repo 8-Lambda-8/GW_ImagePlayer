@@ -56,7 +56,8 @@ FILES = ["ScreenTest.png",#0
     "kardinaele.mp4",#19
     "14_1.png",#20
     "14_2.png",#21
-    "15.png"#22
+    "15.png",#22
+    "Lyrics.mp4"#23
 
 ]
 
@@ -91,7 +92,8 @@ Media = [
     FILES[19],
     FILES[20],
     FILES[21],
-    FILES[22]
+    FILES[22],
+    FILES[23]
 ]
 
 

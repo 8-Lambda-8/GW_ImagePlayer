@@ -45,17 +45,18 @@ FILES = ["ScreenTest.png",#0
     "6_2.png",#8 Indien
     "6_3.png",#9 Hospital
     "6a.png",#10 Glaskreutz
-    "8und9.png",#11 tiroler Berge
-    "10_1.png",#12 New york
-    "10_2.png",#13 New york
-    "10_3.png",#14 New york
-    "11.png",#15 Indien Hole Family Hospital
-    "12_1.png",#16 Vatikan aussen
-    "12_2.png",#17 Vatikan innen
-    "kardinaele.mp4",#18
-    "14_1.png",#19
-    "14_2.png",#20
-    "15.png"#21
+    "Frida.mp4",#11 Frida
+    "8und9.png",#12 tiroler Berge
+    "10_1.png",#13 New york
+    "10_2.png",#14 New york
+    "10_3.png",#15 New york
+    "11.png",#16 Indien Hole Family Hospital
+    "12_1.png",#17 Vatikan aussen
+    "12_2.png",#18 Vatikan innen
+    "kardinaele.mp4",#19
+    "14_1.png",#20
+    "14_2.png",#21
+    "15.png"#22
 
 ]
 
@@ -68,12 +69,13 @@ Media = [
     FILES[4],
     FILES[5],
     FILES[6],
+    FILES[6],
     FILES[7],
     FILES[8],
     FILES[9],
     FILES[10],
-    FILES[10],
     FILES[11],
+    FILES[12],
     FILES[12],
     FILES[13],
     FILES[14],
@@ -81,13 +83,15 @@ Media = [
     FILES[16],
     FILES[17],
     FILES[18],
-    FILES[18],
-    FILES[18],
-    FILES[18],
-    FILES[18],
-    FILES[18],
     FILES[19],
-    FILES[20]
+    FILES[19],
+    FILES[19],
+    FILES[19],
+    FILES[19],
+    FILES[19],
+    FILES[20],
+    FILES[21],
+    FILES[22]
 ]
 
 
@@ -142,7 +146,6 @@ def fadeInPic(pic):
 def fadeOutPic(pic):
 
     imageA = image.load('media/'+pic)
-
 
     for i in reversed(range (int(254/fadeMultiplier))):
 
@@ -207,7 +210,6 @@ def stopVideo():
 
     player.stop()
 
-
 def isImage(x):
     return not (".mp4" in Media[int(x)])
 
@@ -243,10 +245,6 @@ def exit():
     print('\nQuit\n')
     quit()
 
-
-fps = 60
-DISPLAY_REFRESH = USEREVENT
-time.set_timer(DISPLAY_REFRESH, int(1000.0/fps))
 
 """
 if current <0:
@@ -284,9 +282,6 @@ try:
                     print(current)
                 if e.key == K_ESCAPE:
                     exit()
-
-            #elif evt.type == DISPLAY_REFRESH:
-
 
     time.wait(0)
 

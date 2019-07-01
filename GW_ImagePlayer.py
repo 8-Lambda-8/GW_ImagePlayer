@@ -103,11 +103,6 @@ if len(sys.argv)>1:
         if sys.argv[1]=="--DEBUG":
                 DEBUG = True
 
-fadeDelay = 0#.0000001
-Delay = 0#.0001
-
-fadeMultiplier = 8
-
 if DEBUG:
     fadeDelay = 0#.000000001
     Delay = 0#.0000001
@@ -117,47 +112,12 @@ if DEBUG:
 print ('')
 print ('')
 print ('!START!')
-#print(datetime.now())
 print ('')
 
 def showImage(pic):
     imageA = image.load('media/'+pic)
     screen.blit(imageA,(0,0))
     display.flip()
-
-
-#Fade in pic Function
-def fadeInPic(pic):
-    #print ()
-    imageA = image.load('media/'+pic)
-
-
-    for i in range (int(254/fadeMultiplier)):
-
-        screen.fill(BLACK)
-        imageA.set_alpha(i*fadeMultiplier)
-        screen.blit(imageA,(0,0))
-        display.flip()
-        #time.sleep(fadeDelay)
-
-    display.flip()
-
-#END Fade in pic Function
-
-#Fade in pic Function
-def fadeOutPic(pic):
-
-    imageA = image.load('media/'+pic)
-
-    for i in reversed(range (int(254/fadeMultiplier))):
-
-        screen.fill(BLACK)
-        imageA.set_alpha(i*fadeMultiplier)
-        screen.blit(imageA,(0,0))
-        display.flip()
-        #time.sleep(fadeDelay)
-
-#END Fade in pic Function
 
 #INIT Col
 BLACK = ( 0, 0, 0)
@@ -169,7 +129,6 @@ WHITE = ( 230, 230, 230)
 
 display.init()
 infoObject = display.Info()
-
 
 w = infoObject.current_w
 h = infoObject.current_h
@@ -219,7 +178,6 @@ def Change():
     if current.is_integer():
         servoOpen()
         if isImage(current):
-            #fadeInPic(Media[int(current)])
             showImage(Media[int(current)])
         else:
             startVideo(Media[int(current)])
@@ -229,7 +187,6 @@ def Change():
         display.flip()
 
         if isImage(last):
-            #fadeOutPic(Media[int(last)])
             print("")
         else:
             stopVideo()
@@ -259,7 +216,6 @@ try:
             if e.type == QUIT:
                 exit()
             elif e.type == KEYDOWN:
-                #print("KEYDOWN")
                 print(e.key)
                 if e.key == K_SPACE or e.key == K_RIGHT:
                     current = current + 0.5
@@ -269,7 +225,6 @@ try:
                     exit()
 
     time.wait(0)
-
 
 except (KeyboardInterrupt, SystemExit):
 	exit()

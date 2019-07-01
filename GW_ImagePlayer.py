@@ -56,8 +56,8 @@ FILES = ["ScreenTest.png",#0
     "kardinaele.mp4",#19
     "14_1.png",#20
     "14_2.png",#21
-    "15.png",#22
-    "Lyrics.mp4"#23
+    "Lyrics.mp4",#22
+    "15.png"#23
 
 ]
 

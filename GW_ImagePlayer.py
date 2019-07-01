@@ -1,7 +1,6 @@
 import sys, os
 import vlc
-import sched, time
-from datetime import datetime
+import sched, time as timex
 from pygame import *
 
 
@@ -25,6 +24,7 @@ def servoClose():
         servo.ChangeDutyCycle(11)
 
 def servoStop():
+    print("StopServo")
     if isRaspi:
         servo.ChangeDutyCycle(0)
 
@@ -70,7 +70,7 @@ Media = [
     FILES[4],
     FILES[5],
     FILES[6],
-    FILES[6],
+#    FILES[6],
     FILES[7],
     FILES[8],
     FILES[9],
@@ -81,6 +81,7 @@ Media = [
     FILES[13],
     FILES[14],
     FILES[15],
+    FILES[8],#I	ndien
     FILES[16],
     FILES[17],
     FILES[18],
@@ -116,7 +117,7 @@ if DEBUG:
 print ('')
 print ('')
 print ('!START!')
-print(datetime.now())
+#print(datetime.now())
 print ('')
 
 
@@ -201,7 +202,7 @@ player.set_xwindow(display.get_wm_info()['window'])
 vlc_media = vlcInstance.media_new("media/kardinaele.mp4")
 #END INIT VLC
 
-#sch = sched.scheduler(time.time, time.sleep)
+s = sched.scheduler(timex.time, timex.sleep)
 
 def startVideo(x):
     vlc_media = vlcInstance.media_new("media/"+x)
@@ -238,28 +239,19 @@ def Change():
         else:
             stopVideo()
 
-	#sch.enter(5, 1, servoStop())
-	#sch.run()
+	s.enter(2, 1, servoStop())
+	s.run()
 
 def exit():
     globals().update(running = False)
-    #GPIO.cleanup()
+    if isRaspi:
+		servoOpen()
+		GPIO.cleanup()
     print('\nQuit\n')
     quit()
 
-
-"""
-if current <0:
-            current = 0
-
-        if current != last:
-            Change()
-
-        last = current"""
-
 try:
 
-    #time.sleep(5000)
     Change()
     while running:
 

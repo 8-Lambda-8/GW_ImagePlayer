@@ -1,6 +1,7 @@
 import sys, os
 import vlc
-import sched, time as timex
+import time
+from threading import Timer
 from pygame import *
 
 
@@ -81,7 +82,7 @@ Media = [
     FILES[13],
     FILES[14],
     FILES[15],
-    FILES[8],#I	ndien
+    FILES[8],#Indien
     FILES[16],
     FILES[17],
     FILES[18],
@@ -102,7 +103,6 @@ if len(sys.argv)>1:
         if sys.argv[1]=="--DEBUG":
                 DEBUG = True
 
-
 fadeDelay = 0#.0000001
 Delay = 0#.0001
 
@@ -119,7 +119,6 @@ print ('')
 print ('!START!')
 #print(datetime.now())
 print ('')
-
 
 def showImage(pic):
     imageA = image.load('media/'+pic)
@@ -157,8 +156,6 @@ def fadeOutPic(pic):
         screen.blit(imageA,(0,0))
         display.flip()
         #time.sleep(fadeDelay)
-
-
 
 #END Fade in pic Function
 
@@ -202,8 +199,6 @@ player.set_xwindow(display.get_wm_info()['window'])
 vlc_media = vlcInstance.media_new("media/kardinaele.mp4")
 #END INIT VLC
 
-s = sched.scheduler(timex.time, timex.sleep)
-
 def startVideo(x):
     vlc_media = vlcInstance.media_new("media/"+x)
     player.set_media(vlc_media)
@@ -238,9 +233,7 @@ def Change():
             print("")
         else:
             stopVideo()
-
-	s.enter(2, 1, servoStop())
-	s.run()
+	Timer(1, servoStop, ()).start()
 
 def exit():
     globals().update(running = False)
@@ -266,14 +259,12 @@ try:
             if e.type == QUIT:
                 exit()
             elif e.type == KEYDOWN:
-                print("KEYDOWN")
+                #print("KEYDOWN")
                 print(e.key)
                 if e.key == K_SPACE or e.key == K_RIGHT:
                     current = current + 0.5
-                    print(current)
                 if e.key == K_LEFT:
                     current = current - 0.5
-                    print(current)
                 if e.key == K_ESCAPE:
                     exit()
 

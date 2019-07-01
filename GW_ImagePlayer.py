@@ -181,6 +181,7 @@ def Change():
             showImage(Media[int(current)])
         else:
             startVideo(Media[int(current)])
+            Timer(0.4, servoStop, ()).start()
     else:
         servoClose()
         screen.fill(BLACK)
@@ -190,7 +191,7 @@ def Change():
             print("")
         else:
             stopVideo()
-	Timer(1, servoStop, ()).start()
+	
 
 def exit():
     globals().update(running = False)

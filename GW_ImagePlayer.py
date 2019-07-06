@@ -38,7 +38,7 @@ DEBUG = False
 FILES = ["ScreenTest.png",#0
     "1.png",#1 Anna Folder
     "2.png",#2 Steeger Berge
-    "3.png",#3 Klostermauern
+    "3.png",#3 Klostermauern   xx
     "4_1.png",#4 Irland
     "4_2.png",#5 Universitaet
     "5.png",#6 Krieg
@@ -55,10 +55,10 @@ FILES = ["ScreenTest.png",#0
     "12_1.png",#17 Vatikan aussen
     "12_2.png",#18 Vatikan innen
     "kardinaele.mp4",#19
-    "14_1.png",#20
-    "14_2.png",#21
-    "Lyrics.mp4",#22
-    "15.png"#23
+    "14_1.png",#20 steeger berge 
+    "14_2.png",#21 steeg kirche
+    "Lyrics.mp4",#22 
+    "15.png"#23 folder
 
 ]
 
@@ -67,18 +67,20 @@ Media = [
     FILES[0],
     FILES[1],
     FILES[2],
-    FILES[3],
+    
+    #FILES[3],
+    FILES[7],#Schiff
     FILES[4],
     FILES[5],
     FILES[6],
 #    FILES[6],
-    FILES[7],
+    
     FILES[8],
     FILES[9],
     FILES[10],
     FILES[11],
     FILES[12],
-    FILES[12],
+    #Pause
     FILES[13],
     FILES[14],
     FILES[15],
@@ -102,6 +104,7 @@ Media = [
 if len(sys.argv)>1:
         if sys.argv[1]=="--DEBUG":
                 DEBUG = True
+
 
 if DEBUG:
     fadeDelay = 0#.000000001
@@ -159,13 +162,16 @@ vlc_media = vlcInstance.media_new("media/kardinaele.mp4")
 #END INIT VLC
 
 def startVideo(x):
-    vlc_media = vlcInstance.media_new("media/"+x)
-    player.set_media(vlc_media)
+    if isImage(last):
+        vlc_media = vlcInstance.media_new("media/"+x)
+        player.set_media(vlc_media)
     player.play()
 
 def stopVideo():
-
-    player.stop()
+    if isImage(current+0.5):
+        player.stop()
+    else:
+        player.pause()
 
 def isImage(x):
     return not (".mp4" in Media[int(x)])
@@ -183,7 +189,8 @@ def Change():
             startVideo(Media[int(current)])
             Timer(0.4, servoStop, ()).start()
     else:
-        servoClose()
+        if isImage(current+0.5)|isImage(current-0.5):
+            servoClose()
         screen.fill(BLACK)
         display.flip()
 

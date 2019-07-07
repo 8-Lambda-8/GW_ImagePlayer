@@ -36,7 +36,7 @@ current = 0.0
 
 DEBUG = False
 
-FILES = ["1.png",#0
+FILES = ["ScreenTest.png",#0
     "1.png",#1 Anna Folder
     "2.png",#2 Steeger Berge
     "3.png",#3 Klostermauern   xx
@@ -84,6 +84,7 @@ Media = [
     FILES[11],
     FILES[12],
     #Pause
+    "PP",
     FILES[13],
     FILES[14],
     #FILES[15],
@@ -152,6 +153,9 @@ screen.fill(BLACK)
 
 i = 0
 
+ppInt = 0
+
+
 display.set_caption('GW_ImagePlayer')
 
 mouse.set_pos(w, h)
@@ -181,6 +185,15 @@ def stopVideo():
 def isImage(x):
     return not (".mp4" in Media[int(x)])
 
+def PP():
+    if current.is_integer() and Media[int(current)] is "PP":
+        globals().update(ppInt =  ppInt + 1)
+        print(ppInt)
+        if ppInt > 85:
+            globals().update(ppInt = 1)
+        showImage("PP/Folie"+str(ppInt)+".png")
+        Timer(1, PP, ()).start()
+
 def Change():
     print("")
     print("Current="+str(current))
@@ -188,11 +201,17 @@ def Change():
 
     if current.is_integer():
         servoOpen()
-        if isImage(current):
-            showImage(Media[int(current)])
+        if Media[int(current)] != "PP":
+            if isImage(current):
+                showImage(Media[int(current)])
+            else:
+                startVideo(Media[int(current)])
+                Timer(0.4, servoStop, ()).start()
         else:
-            startVideo(Media[int(current)])
-            Timer(0.4, servoStop, ()).start()
+            #start Pause Praesentation
+            globals().update(ppInt = 0)
+            print("PP")
+            PP()
     else:
         if isImage(current+0.5)|isImage(current-0.5):
             servoClose()
@@ -208,8 +227,9 @@ def Change():
 def exit():
     globals().update(running = False)
     if isRaspi:
-		servoOpen()
-		GPIO.cleanup()
+        servoOpen()
+        GPIO.cleanup()
+
     print('\nQuit\n')
     quit()
 

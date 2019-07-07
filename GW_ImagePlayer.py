@@ -192,7 +192,7 @@ def PP():
         if ppInt > 85:
             globals().update(ppInt = 1)
         showImage("PP/Folie"+str(ppInt)+".png")
-        Timer(1, PP, ()).start()
+        Timer(14, PP, ()).start()
 
 def Change():
     print("")

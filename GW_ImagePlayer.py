@@ -25,6 +25,7 @@ def servoClose():
         servo.ChangeDutyCycle(11)
 
 def servoStop():
+    
     print("StopServo")
     if isRaspi:
         servo.ChangeDutyCycle(0)
@@ -35,7 +36,7 @@ current = 0.0
 
 DEBUG = False
 
-FILES = ["ScreenTest.png",#0
+FILES = ["1.png",#0
     "1.png",#1 Anna Folder
     "2.png",#2 Steeger Berge
     "3.png",#3 Klostermauern   xx
@@ -45,7 +46,7 @@ FILES = ["ScreenTest.png",#0
     "6_1.png",#7 Schiff
     "6_2.png",#8 Indien
     "6_3.png",#9 Hospital
-    "6a.png",#10 Glaskreutz
+    "6_a.png",#10 Glaskreutz
     "Frida.mp4",#11 Frida
     "8und9.png",#12 tiroler Berge
     "10_1.png",#13 New york
@@ -57,8 +58,10 @@ FILES = ["ScreenTest.png",#0
     "kardinaele.mp4",#19
     "14_1.png",#20 steeger berge 
     "14_2.png",#21 steeg kirche
-    "Lyrics.mp4",#22 
-    "15.png"#23 folder
+    "15_1.png",#22 lyrics
+    "15_2.png",#23 
+    "15_3.png",#24 
+    "16.png"#25 folder
 
 ]
 
@@ -83,7 +86,7 @@ Media = [
     #Pause
     FILES[13],
     FILES[14],
-    FILES[15],
+    #FILES[15],
     FILES[8],#Indien
     FILES[16],
     FILES[17],
@@ -97,7 +100,9 @@ Media = [
     FILES[20],
     FILES[21],
     FILES[22],
-    FILES[23]
+    FILES[23],
+    FILES[24],
+    FILES[25]
 ]
 
 

@@ -61,7 +61,8 @@ FILES = ["ScreenTest.png",#0
     "15_1.png",#22 lyrics
     "15_2.png",#23 
     "15_3.png",#24 
-    "16.png"#25 folder
+    "16_1.png",#25 folder
+    "16_2.png"#26 folder2
 
 ]
 
@@ -69,28 +70,26 @@ FILES = ["ScreenTest.png",#0
 Media = [
     FILES[0],
     FILES[1],
-    FILES[2],
-    
+    FILES[2],    
     #FILES[3],
     FILES[7],#Schiff
     FILES[4],
     FILES[5],
     FILES[6],
 #    FILES[6],
-    
-    FILES[8],
-    FILES[9],
+    FILES[8],#9
+    FILES[9],#10
     FILES[10],
     FILES[11],
     FILES[12],
     #Pause
     "PP",
-    FILES[13],
-    FILES[14],
+    FILES[13],#14
+    FILES[14],#15
     #FILES[15],
     FILES[8],#Indien
     FILES[16],
-    FILES[17],
+    FILES[17],#18
     FILES[18],
     FILES[19],
     FILES[19],
@@ -103,7 +102,8 @@ Media = [
     FILES[22],
     FILES[23],
     FILES[24],
-    FILES[25]
+    FILES[25],
+    FILES[26]
 ]
 
 
@@ -251,7 +251,11 @@ try:
             elif e.type == KEYDOWN:
                 print(e.key)
                 if e.key == K_SPACE or e.key == K_RIGHT:
-                    current = current + 0.5
+                    if current == 3 or current == 4 or current == 7 or current == 13 or current == 15 or current == 17 or current == 25 or current == 27 or current == 28 or current == 30:
+                        print("is 5")
+                        current = current + 1
+                    else:
+                        current = current + 0.5
                 if e.key == K_LEFT:
                     current = current - 0.5
                 if e.key == K_ESCAPE:

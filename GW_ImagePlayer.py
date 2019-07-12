@@ -253,7 +253,7 @@ try:
             elif e.type == KEYDOWN:
                 print(e.key)
                 if e.key == K_SPACE or e.key == K_RIGHT:
-                    if current == 3 or current == 4 or current == 7 or current == 13 or current == 15 or current == 17 or current == 25 or current == 27 or current == 28 or current == 30:
+                    if current == 4 or current == 5 or current == 8 or current == 14 or current == 16 or current == 18 or current == 26 or current == 28 or current == 29 or current == 31:
                         print("is 5")
                         current = current + 1
                     else:
